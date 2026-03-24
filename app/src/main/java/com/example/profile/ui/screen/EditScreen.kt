@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Abc
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material3.Icon
@@ -128,4 +129,16 @@ fun Part(title: String, content: @Composable () -> Unit) {
 @Composable
 fun EditScreenPreview() {
     EditScreen()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun FormPreview() {
+    Form("タイトル", "ヒント", KeyboardType.Text)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TogglePreview() {
+    Toggle("タイトル", Icons.Default.Abc)
 }
