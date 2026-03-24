@@ -38,15 +38,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.profile.Nav
 import com.example.profile.R
 import com.example.profile.ui.component.Header
 import com.example.profile.ui.theme.ProfileTheme
 
 @Composable
-fun EditScreen() {
+fun EditScreen(navController: NavController) {
     ProfileTheme {
         Scaffold(
-            topBar = { Header("プロフィール編集", { /*ここに戻るボタン押下時の処理を実装*/ }) }
+            topBar = { Header("プロフィール編集") { navController.navigate(Nav.Main.name) } }
         ) { innerPadding ->
             Column(
                 modifier = Modifier.fillMaxSize().padding(innerPadding),
@@ -67,7 +69,7 @@ fun EditScreen() {
                         Toggle("公開プロフィール", Icons.Default.Public)
                     }
                 }
-                Button("変更を保存") { /*ここにボタン押下時の処理を実装*/ }
+                Button("変更を保存") { navController.navigate(Nav.Main.name)}
             }
         }
     }
@@ -192,12 +194,6 @@ fun Button(text: String, onClick: (() -> Unit)) {
 
 @Preview(showBackground = true)
 @Composable
-fun EditScreenPreview() {
-    EditScreen()
-}
-
-@Preview(showBackground = true)
-@Composable
 fun MyImagePreview() {
     MyImage()
 }
@@ -217,5 +213,5 @@ fun TogglePreview() {
 @Preview(showBackground = true)
 @Composable
 fun ButtonPreview() {
-    Button("保存する", {})
+    Button("保存する") {}
 }

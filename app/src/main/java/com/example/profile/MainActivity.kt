@@ -4,13 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.profile.ui.screen.EditScreen
+import com.example.profile.ui.screen.MainScreen
 import com.example.profile.ui.theme.ProfileTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,30 +17,28 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ProfileTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            MainNav()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun MainNav() {
+    val navController = rememberNavController()
+
+    ProfileTheme {
+        NavHost(navController = navController, startDestination = Nav.Main.name) {
+            composable(route = Nav.Main.name) {
+                MainScreen(navController)
+            }
+            composable(route = Nav.Edit.name) {
+                EditScreen(navController)
+            }
+        }
+    }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ProfileTheme {
-        Greeting("Android")
-    }
+enum class Nav {
+    Main,
+    Edit,
 }
