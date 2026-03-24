@@ -72,13 +72,13 @@ fun MyImage() {
             imageVector = Icons.Default.AccountCircle,
             contentDescription = stringResource(id = R.string.image_icon_description),
             modifier = Modifier
-                .padding(0.dp, 10.dp, 0.dp, 0.dp)
+                .padding(0.dp, 12.dp, 0.dp, 8.dp)
                 .size(160.dp),
             tint = Color(0xFFE2E2ED)
         )
         Box(
             modifier = Modifier
-                .padding(2.dp)
+                .padding(8.dp)
                 .size(40.dp)
                 .align(Alignment.BottomEnd)
                 .background(
@@ -100,7 +100,7 @@ fun MyImage() {
 fun Form(title: String, hint: String, type: KeyboardType) {
     val text = remember{ mutableStateOf("") }
     Column(
-        modifier = Modifier.padding(10.dp, 5.dp)
+        modifier = Modifier.padding(8.dp)
     ) {
         Text(text = title, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
         TextField(
@@ -122,19 +122,19 @@ fun Toggle(title: String, icon: ImageVector) {
     val checked = remember{ mutableStateOf(false) }
     Row(
         modifier = Modifier
-            .fillMaxWidth().padding(10.dp, 5.dp)
+            .fillMaxWidth().padding(8.dp, 8.dp)
             .background(color = Color(0xFFE2E2ED),  shape = RoundedCornerShape(4.dp)),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Row(
-            modifier = Modifier.padding(10.dp, 0.dp),
+            modifier = Modifier.padding(12.dp, 0.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = stringResource(id = R.string.toggle_icon_description),
-                modifier = Modifier.padding(0.dp, 16.dp, 10.dp, 16.dp),
+                modifier = Modifier.padding(0.dp, 16.dp, 12.dp, 16.dp),
                 tint = Color(0xFF4F629F)
             )
             Text(text = title)
@@ -142,7 +142,7 @@ fun Toggle(title: String, icon: ImageVector) {
         Switch(
             checked = checked.value,
             onCheckedChange = { checked.value = it },
-            modifier = Modifier.padding(0.dp, 0.dp, 10.dp, 0.dp)
+            modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp)
         )
     }
 }
@@ -150,13 +150,14 @@ fun Toggle(title: String, icon: ImageVector) {
 @Composable
 fun Part(title: String, content: @Composable () -> Unit) {
     Column(
-        modifier = Modifier.padding(10.dp)
+        modifier = Modifier.padding(12.dp)
     ) {
         Text(
             text = title,
             color = Color.Gray,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.labelSmall
+            style = MaterialTheme.typography.labelSmall,
+            modifier = Modifier.padding(8.dp, 0.dp)
         )
         content()
     }
