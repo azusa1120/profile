@@ -3,15 +3,19 @@ package com.example.profile.ui.screen
 import androidx.compose.foundation.background
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Abc
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material3.Icon
@@ -42,6 +46,7 @@ fun EditScreen() {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            MyImage()
             Part("個人情報") {
                 Column {
                     Form("氏名", "山田 太郎", KeyboardType.Text)
@@ -55,6 +60,38 @@ fun EditScreen() {
                     Toggle("公開プロフィール", Icons.Default.Public)
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun MyImage() {
+    // 本当はカメラ起動させたい
+    Box {
+        Icon(
+            imageVector = Icons.Default.AccountCircle,
+            contentDescription = stringResource(id = R.string.image_icon_description),
+            modifier = Modifier
+                .padding(0.dp, 10.dp, 0.dp, 0.dp)
+                .size(160.dp),
+            tint = Color(0xFFE2E2ED)
+        )
+        Box(
+            modifier = Modifier
+                .padding(2.dp)
+                .size(40.dp)
+                .align(Alignment.BottomEnd)
+                .background(
+                    color = Color(0xFF4F629F),
+                    shape = RoundedCornerShape(8.dp)
+                )
+        ) {
+            Icon(
+                imageVector = Icons.Default.CameraAlt,
+                contentDescription = stringResource(id = R.string.image_icon_description),
+                modifier = Modifier.align(Alignment.Center).padding(8.dp),
+                tint = Color(0xFFFFFFFF)
+            )
         }
     }
 }
@@ -129,6 +166,12 @@ fun Part(title: String, content: @Composable () -> Unit) {
 @Composable
 fun EditScreenPreview() {
     EditScreen()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MyImagePreview() {
+    MyImage()
 }
 
 @Preview(showBackground = true)
