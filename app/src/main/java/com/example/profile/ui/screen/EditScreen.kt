@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Public
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -36,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.profile.R
 import com.example.profile.ui.component.Header
 import com.example.profile.ui.theme.ProfileTheme
@@ -65,6 +67,7 @@ fun EditScreen() {
                         Toggle("公開プロフィール", Icons.Default.Public)
                     }
                 }
+                Button("変更を保存") { /*ここにボタン押下時の処理を実装*/ }
             }
         }
     }
@@ -171,6 +174,22 @@ fun Part(title: String, content: @Composable () -> Unit) {
     }
 }
 
+@Composable
+fun Button(text: String, onClick: (() -> Unit)) {
+    Button(
+        onClick = { onClick() },
+        modifier = Modifier.fillMaxWidth().padding(12.dp),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier.padding(0.dp, 8.dp),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun EditScreenPreview() {
@@ -193,4 +212,10 @@ fun FormPreview() {
 @Composable
 fun TogglePreview() {
     Toggle("タイトル", Icons.Default.Abc)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ButtonPreview() {
+    Button("保存する", {})
 }
