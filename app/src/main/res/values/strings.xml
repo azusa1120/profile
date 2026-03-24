@@ -3,4 +3,5 @@
     <!--  description  -->
     <string name="toggle_icon_description">トグル横アイコン</string>
     <string name="image_icon_description">ユーザアイコン</string>
+    <string name="back_icon_description">戻るボタンアイコン</string>
 </resources>

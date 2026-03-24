@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -36,28 +37,33 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.profile.R
+import com.example.profile.ui.component.Header
 import com.example.profile.ui.theme.ProfileTheme
 
 @Composable
 fun EditScreen() {
     ProfileTheme {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            MyImage()
-            Part("個人情報") {
-                Column {
-                    Form("氏名", "山田 太郎", KeyboardType.Text)
-                    Form("メールアドレス", "sample@example", KeyboardType.Email)
-                    Form("自己紹介", "趣味や仕事を書きましょう", KeyboardType.Text)
+        Scaffold(
+            topBar = { Header("プロフィール編集", { /*ここに戻るボタン押下時の処理を実装*/ }) }
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier.fillMaxSize().padding(innerPadding),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                MyImage()
+                Part("個人情報") {
+                    Column {
+                        Form("氏名", "山田 太郎", KeyboardType.Text)
+                        Form("メールアドレス", "sample@example", KeyboardType.Email)
+                        Form("自己紹介", "趣味や仕事を書きましょう", KeyboardType.Text)
+                    }
                 }
-            }
-            Part("設定") {
-                Column {
-                    Toggle("プッシュ通知", Icons.Default.Notifications)
-                    Toggle("公開プロフィール", Icons.Default.Public)
+                Part("設定") {
+                    Column {
+                        Toggle("プッシュ通知", Icons.Default.Notifications)
+                        Toggle("公開プロフィール", Icons.Default.Public)
+                    }
                 }
             }
         }
@@ -82,7 +88,7 @@ fun MyImage() {
                 .size(40.dp)
                 .align(Alignment.BottomEnd)
                 .background(
-                    color = Color(0xFF4F629F),
+                    color = MaterialTheme.colorScheme.primary,
                     shape = RoundedCornerShape(8.dp)
                 )
         ) {
@@ -90,7 +96,7 @@ fun MyImage() {
                 imageVector = Icons.Default.CameraAlt,
                 contentDescription = stringResource(id = R.string.image_icon_description),
                 modifier = Modifier.align(Alignment.Center).padding(8.dp),
-                tint = Color(0xFFFFFFFF)
+                tint = Color.White
             )
         }
     }
@@ -107,9 +113,11 @@ fun Form(title: String, hint: String, type: KeyboardType) {
             value = text.value,
             onValueChange = { text.value = it },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text(text = hint) },
+            placeholder = { Text(text = hint, color = Color.Gray) },
             keyboardOptions = KeyboardOptions(keyboardType = type),
             colors = TextFieldDefaults.colors(
+                focusedTextColor = Color.Black,
+                unfocusedTextColor = Color.Black,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             )
@@ -135,9 +143,9 @@ fun Toggle(title: String, icon: ImageVector) {
                 imageVector = icon,
                 contentDescription = stringResource(id = R.string.toggle_icon_description),
                 modifier = Modifier.padding(0.dp, 16.dp, 12.dp, 16.dp),
-                tint = Color(0xFF4F629F)
+                tint = MaterialTheme.colorScheme.primary
             )
-            Text(text = title)
+            Text(text = title, color = Color.Black)
         }
         Switch(
             checked = checked.value,
