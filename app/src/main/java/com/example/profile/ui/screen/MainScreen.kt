@@ -9,12 +9,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.profile.Nav
 import com.example.profile.ui.theme.ProfileTheme
 
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavController) {
     ProfileTheme {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -25,15 +26,9 @@ fun MainScreen() {
                 text = "プロフィールを作成しましょう",
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-            Button(onClick = { /*TODO: クリック時の処理を記載*/ }) {
+            Button(onClick = { navController.navigate(Nav.Edit.name) }) {
                 Text(text = "プロフィールを作成する")
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MainScreenPreview() {
-    MainScreen()
 }

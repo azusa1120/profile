@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.profile.ui.screen.EditScreen
+import com.example.profile.ui.screen.MainScreen
 import com.example.profile.ui.theme.ProfileTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,13 +27,18 @@ fun MainNav() {
     val navController = rememberNavController()
 
     ProfileTheme {
-        NavHost(navController = navController, startDestination = "top") {
-            composable(route = "top") {
-                // TODO: TOP画面のコンポーザブル関数を呼び出す
+        NavHost(navController = navController, startDestination = Nav.Main.name) {
+            composable(route = Nav.Main.name) {
+                MainScreen(navController)
             }
-            composable(route = "edit") {
-                // TODO: 編集画面のコンポーザブル関数を呼び出す
+            composable(route = Nav.Edit.name) {
+                EditScreen(navController)
             }
         }
     }
+}
+
+enum class Nav {
+    Main,
+    Edit,
 }
